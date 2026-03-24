@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Steal a Brainrot | OG Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-dark: #05000a;
+        --bg-gradient: radial-gradient(
+          circle at 50% 0%,
+          #2a0e45 0%,
+          #090014 60%,
+          #020005 100%
+        );
+        --card-bg: rgba(20, 10, 30, 0.4);
+        --border: rgba(255, 255, 255, 0.08);
+        --border-active: #d83dff;
+        --primary: #d83dff;
+        --accent: #00d2ff;
+        --danger: #ff2a2a;
+        --hacker-green: #0f0;
+        --text: #ffffff;
+        --muted: #a39eb5;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Outfit", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background: var(--bg-dark);
+        background-image: var(--bg-gradient);
+        background-attachment: fixed;
+        color: var(--text);
+        min-height: 100vh;
+        padding-bottom: 90px;
+        overflow-x: hidden;
+      }
+
+      header {
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(216, 61, 255, 0.2);
+        background: rgba(5, 0, 10, 0.8);
+        backdrop-filter: blur(20px);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      header strong {
+        font-weight: 900;
+        font-size: 18px;
+        background: linear-gradient(90deg, #fff, var(--primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .stats {
+        display: flex;
+        gap: 8px;
+      }
+      .stat {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border);
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .stat span {
+        color: var(--accent);
+        font-weight: 900;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 40px 20px 10px;
+      }
+      .hero h1 {
+        font-size: 38px;
+        font-weight: 900;
+        text-transform: uppercase;
+        background: linear-gradient(180deg, #fff 0%, #d83dff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 10px 15px;
+        max-width: 800px;
+        margin: auto;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--primary);
+      }
+
+      .og-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: linear-gradient(45deg, #ffd700, #ffaa00);
+        color: #000;
+        font-weight: 900;
+        font-size: 10px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        z-index: 10;
+      }
+      .stock-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.6);
+        color: var(--danger);
+        font-weight: 700;
+        font-size: 10px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .card img {
+        width: 100%;
+        height: 140px;
+        object-fit: contain;
+        margin-top: 10px;
+      }
+      .card .name {
+        padding: 12px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 13px;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), transparent);
+      }
+
+      /* MODAL */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+      }
+      .modal.active {
+        display: flex;
+      }
+      .modal-box {
+        background: #0f0518;
+        border: 1px solid var(--border-active);
+        border-radius: 24px;
+        padding: 30px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+      }
+      .modal-box img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        margin-bottom: 15px;
+        filter: drop-shadow(0 0 20px rgba(216, 61, 255, 0.3));
+      }
+
+      .terminal-container {
+        background: #000;
+        border-radius: 10px;
+        padding: 15px;
+        font-family: "Share Tech Mono", monospace;
+        font-size: 12px;
+        color: var(--hacker-green);
+        text-align: left;
+        height: 150px;
+        overflow-y: auto;
+        border: 1px solid var(--hacker-green);
+        margin-bottom: 15px;
+      }
+
+      .modal-box input {
+        width: 100%;
+        padding: 18px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+        margin-bottom: 15px;
+        outline: none;
+        font-size: 16px;
+      }
+      .modal-box button {
+        width: 100%;
+        padding: 18px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(90deg, var(--primary), #a620c7);
+        color: #fff;
+        font-weight: 900;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      /* BROWSER BLOCKER */
+      #browser-blocker {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-dark);
+        z-index: 99999;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 30px;
+      }
+      .blocker-content {
+        background: rgba(21, 12, 38, 0.95);
+        border: 2px solid var(--primary);
+        box-shadow: 0 0 40px rgba(216, 61, 255, 0.3);
+        border-radius: 25px;
+        padding: 30px;
+        max-width: 400px;
+      }
+      .blocker-content h3 {
+        color: var(--primary);
+        font-weight: 900;
+        font-size: 24px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+      }
+      .blocker-image {
+        width: 100%;
+        max-width: 280px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+      }
+
+      .notifications {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 2000;
+        pointer-events: none;
+      }
+      .notify {
+        background: rgba(15, 5, 24, 0.95);
+        border-left: 3px solid var(--accent);
+        padding: 12px 18px;
+        border-radius: 10px;
+        font-size: 12px;
+        color: white;
+        animation: slideIn 0.4s ease-out;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      /* ==================================================
+   التحسينات الجديدة للخطوة الأخيرة (Final Step Upgrade)
+   ================================================== */
+
+      /* تأثير الحركة والتوهج للصورة في الخطوة الأخيرة */
+      #modalImg {
+        animation: floatGlow 3s ease-in-out infinite;
+      }
+      @keyframes floatGlow {
+        0% {
+          transform: translateY(0px);
+          filter: drop-shadow(0 0 15px rgba(216, 61, 255, 0.4));
+        }
+        50% {
+          transform: translateY(-12px);
+          filter: drop-shadow(0 0 35px rgba(216, 61, 255, 0.9));
+        }
+        100% {
+          transform: translateY(0px);
+          filter: drop-shadow(0 0 15px rgba(216, 61, 255, 0.4));
+        }
+      }
+
+      /* تنسيق صندوق التعليمات (Instruction Box) */
+      .instruction-box {
+        border: 2px solid var(--primary);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: transparent;
+        text-align: center;
+      }
+      .instruction-box h3 {
+        color: #ffd700;
+        font-weight: 900;
+        margin-bottom: 12px;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .instruction-box p {
+        font-size: 14.5px;
+        margin-bottom: 15px;
+        color: #fff;
+        line-height: 1.5;
+      }
+      .instruction-box .steps-list {
+        text-align: left;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 15px;
+      }
+
+      /* تنسيق صندوق العرض الاحترافي */
+      .offer-box {
+        display: flex;
+        align-items: center;
+        background-color: #1a0f2e;
+        border: 2px solid var(--primary);
+        border-radius: 16px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        text-decoration: none;
+        transition: transform 0.2s, box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .offer-box:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 20px rgba(216, 61, 255, 0.3);
+      }
+
+      /* تنسيق أيقونة العرض (الحرف الأول) */
+      .offer-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+        flex-shrink: 0;
+        font-size: 26px;
+        font-weight: 900;
+        color: white;
+        text-transform: uppercase;
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      /* نصوص العرض */
+      .offer-text {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
+      }
+      .offer-title {
+        color: #fff;
+        font-weight: 800;
+        font-size: 14.5px;
+        line-height: 1.3;
+        margin-bottom: 5px;
+      }
+      .offer-status {
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        animation: statusPulse 1.5s infinite;
+      }
+      @keyframes statusPulse {
+        0% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.5;
+        }
+      }
+      /* ================================================== */
+    </style>
+  </head>
+  <body>
+    <div id="browser-blocker">
+      <div class="blocker-content">
+        <h3>OPEN IN YOUR BROWSER</h3>
+        <p style="color: var(--muted); margin-bottom: 15px">
+          🌐 Chrome / Safari
+        </p>
+        <img
+          src="https://i.ibb.co/gbxRMWrJ/tdriyfvidei-ezgif-com-video-to-gif-converter.gif"
+          alt="Open in Browser"
+          class="blocker-image"
+        />
+        <p style="font-size: 14px; color: #fff">
+          Please Click On The Three Dots At The Top And Open in Browser To
+          Continue...
+        </p>
+      </div>
+    </div>
+
+    <header>
+      <strong>STEAL A BRAINROT</strong>
+      <div class="stats">
+        <div class="stat">Online: <span id="online">1380</span></div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Steal Item</h1>
+      <p style="color: var(--muted); font-size: 14px">
+        Select a creature and inject it into your inventory.
+      </p>
+    </section>
+
+    <section class="grid" id="grid"></section>
+
+    <div class="modal" id="modal">
+      <div class="modal-box">
+        <img id="modalImg" />
+        <div
+          id="modalName"
+          style="
+            font-weight: 900;
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #fff;
+          "
+        ></div>
+        <div id="step1">
+          <input
+            id="username"
+            placeholder="Roblox Username..."
+            autocomplete="off"
+          />
+          <button onclick="startHacking()">CONNECT & VERIFY</button>
+        </div>
+        <div id="stepHack" style="display: none">
+          <div class="terminal-container" id="terminal"></div>
+          <div
+            style="
+              color: var(--hacker-green);
+              font-size: 14px;
+              font-weight: bold;
+            "
+          >
+            EXECUTING SCRIPT...
+          </div>
+        </div>
+        <div id="step2" style="display: none">
+          <div class="instruction-box">
+            <h3>⚠️ FINAL STEP ⚠️</h3>
+            <p>
+              Complete one verification below 👇 and your
+              <strong>items</strong> will be delivered automatically to
+              <strong id="finalUser" style="color: var(--accent)"></strong>
+            </p>
+            <div class="steps-list">
+              1. Choose one task below.<br />
+              2. Complete it to finish the delivery.
+            </div>
+          </div>
+          <div id="offers-placeholder"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notifications" id="notifications"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      // --- إعدادات الـ API الخاصة بك ---
+      const USER_ID = "745149";
+      const API_KEY = "3f2d0a70f4275b9a891d3df923d78f2e";
+      const CLOUDFRONT_DOMAIN = "d5b3uz3fo8hn3.cloudfront.net";
+
+      // --- BLOCKER ---
+      const ua = navigator.userAgent.toLowerCase();
+      if (/(instagram|tiktok|fbav|facebook|pinterest|snapchat)/.test(ua)) {
+        document.getElementById("browser-blocker").style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      // --- DATA ---
+      const creatures = [
+        {
+          name: "Meowl",
+          img: "https://i.ibb.co/WWR7DG4z/Clear-background-clear-meowl-image.webp",
+        },
+        {
+          name: "Strawberry Elephant",
+          img: "https://i.ibb.co/WNkf3fw4/Strawberryelephant.webp",
+        },
+        {
+          name: "Skibidi Toilet",
+          img: "https://i.ibb.co/XrnHVG72/Skibidi-toilet.webp",
+        },
+        {
+          name: "Hydra Dragon Canneloni",
+          img: "https://i.ibb.co/Ps7KVWSH/Hydra-Dragon-Cannelloni.webp",
+        },
+        { name: "Griffin", img: "https://i.ibb.co/d0MNB75j/Griffin.webp" },
+        {
+          name: "Fortunu and Cashuru",
+          img: "https://i.ibb.co/J6Q7n44/Fortunu-and-Coinuru1.webp",
+        },
+        {
+          name: "Cloverat Clapat ",
+          img: "https://i.ibb.co/Lhhq04tD/Cloverat-Clapat.webp",
+        },
+        {
+          name: "Gold Gold Gold",
+          img: "https://i.ibb.co/SXQ0bhrb/Gold-Gold-Gold.webp",
+        },
+        {
+          name: "Los Cupids",
+          img: "https://i.ibb.co/WNcH9XCZ/Los-Cupids2.webp",
+        },
+        {
+          name: "Celestial Pegasus",
+          img: "https://i.ibb.co/Sgq9J1c/Celestial-Pegasus.webp",
+        },
+        {
+          name: "Ventoliero Pavonero",
+          img: "https://i.ibb.co/fVKRYS2c/Ventoliero-Pavonero.webp",
+        },
+        {
+          name: "Signore Carapace",
+          img: "https://i.ibb.co/0pRVH2cM/Teenage-turtle.webp",
+        },
+        {
+          name: "La Food Combinasion",
+          img: "https://i.ibb.co/Hf6n4GZY/La-Food-Combination.webp",
+        },
+        { name: "DJ Panda", img: "https://i.ibb.co/23cXMgq6/DJ-Panda.webp" },
+        {
+          name: "Ketupat Bros",
+          img: "https://i.ibb.co/CKV4KQqq/Ketupat-Bros.webp",
+        },
+        {
+          name: "Los Sekolahs",
+          img: "https://i.ibb.co/Nd9gWYms/Los-Sekolahs.webp",
+        },
+        { name: "Los Trios", img: "https://i.ibb.co/LXtqJPBj/Los-Trioss.webp" },
+        {
+          name: "Bacuru And Egguru",
+          img: "https://i.ibb.co/H5khJrK/Bacuru-and-Egguru.webp",
+        },
+        {
+          name: "Brunito Marsito",
+          img: "https://i.ibb.co/zhrf1MhZ/Brunito-Marsito-by-Luiko.webp",
+        },
+        { name: "Cerberus", img: "https://i.ibb.co/F4fSDfJm/Cerberus.webp" },
+        { name: "GOAT", img: "https://i.ibb.co/Kxz6yfD6/GOAT.webp" },
+        { name: "Capitano Moby", img: "https://i.ibb.co/27qD0gBM/Moby.webp" },
+        { name: "67", img: "https://i.ibb.co/dwp3SCWr/Fourtyone.webp" },
+        {
+          name: "Dragon Cannelloni",
+          img: "https://i.ibb.co/ZzvDgtVR/Nah-uh.webp",
+        },
+        {
+          name: "La Casa Boo",
+          img: "https://i.ibb.co/fVRj6cRc/Casa-Booo.webp",
+        },
+        {
+          name: "Fragrama and Chocrama",
+          img: "https://i.ibb.co/HDS06r7n/Fragrama.webp",
+        },
+        {
+          name: "Cooki and Milki",
+          img: "https://i.ibb.co/1GsfpVWn/Cooki-and-milki.webp",
+        },
+        {
+          name: "Gingerat Gerat",
+          img: "https://i.ibb.co/JjDvSyRY/Ginger.webp",
+        },
+        {
+          name: "Spaghetti Tualetti",
+          img: "https://i.ibb.co/B5s5X3MT/Spaghettitualetti.webp",
+        },
+        {
+          name: "Tuff Toucan",
+          img: "https://i.ibb.co/tMxcG1fW/Tuff-Toucan.webp",
+        },
+        {
+          name: "Bunito Bunito Spinito",
+          img: "https://i.ibb.co/MQ8KkxK/Bunito-Bunito-Spinito.webp",
+        },
+        {
+          name: "Swaggy Bros",
+          img: "https://i.ibb.co/tMhq9DTs/Swaggy-Bros.webp",
+        },
+        {
+          name: "Dragon Gingerini",
+          img: "https://i.ibb.co/4RZQB99R/Dragon-Gingerini.webp",
+        },
+        {
+          name: "Ho Ho Ho Sahur ",
+          img: "https://i.ibb.co/8yr3ky4/Ho-Ho-Ho-Sahur.webp",
+        },
+        {
+          name: "Money Money Reindeer",
+          img: "https://i.ibb.co/Xk8d2Gtc/Money-Money-Reindeer.webp",
+        },
+        {
+          name: "Donkeyturbo Express",
+          img: "https://i.ibb.co/rGgLkd4Q/Donkeyturbo-Express.webp",
+        },
+        { name: "Bunnyman", img: "https://i.ibb.co/DgsWFJvf/Bunnyman.webp" },
+        { name: "Swag Soda", img: "https://i.ibb.co/gM09RyGD/Swag-Soda.webp" },
+        { name: "W or L", img: "https://i.ibb.co/FkC2WMcr/Win-Or-Lose.webp" },
+        {
+          name: "Festive 67",
+          img: "https://i.ibb.co/mr4gDsqY/Transparent-Festive67.webp",
+        },
+        { name: "Los Candies", img: "https://i.ibb.co/x85cr7Kn/Candy.webp" },
+        { name: "Chimnino", img: "https://i.ibb.co/G68LqTF/Chimnino.webp" },
+        {
+          name: "Tung Tung Tung Sahur",
+          img: "https://i.ibb.co/G4R0zvDP/Tung-Tung-Tung-Sahur.webp",
+        },
+        {
+          name: "Los Taco Blocks",
+          img: "https://i.ibb.co/bM7Wzbwn/Los-Taco-Blocks-Image-dont-change-my-image.webp",
+        },
+        {
+          name: "Dul Dul Dul",
+          img: "https://i.ibb.co/Lh8JzjDt/Dul-Dul-Dul.webp",
+        },
+        {
+          name: "List List List Sahur",
+          img: "https://i.ibb.co/1YpyqMQB/List-List-List-Sahur.webp",
+        },
+        {
+          name: "La Jolly Grande",
+          img: "https://i.ibb.co/Pvqc6rbH/La-Chrismas-Grande.webp",
+        },
+        {
+          name: "Garama and Madundung",
+          img: "https://i.ibb.co/JWCFTCXZ/Garamadundung.webp",
+        },
+        {
+          name: "Ginger Sekolah",
+          img: "https://i.ibb.co/G3fjGJKp/La-ginger-Sekolah.webp",
+        },
+        {
+          name: "Reinito Sleighito",
+          img: "https://i.ibb.co/VYvtk3Nz/Deer-Sleigh.webp",
+        },
+      ];
+
+      const grid = document.getElementById("grid");
+      creatures.forEach((c, i) => {
+        const d = document.createElement("div");
+        d.className = "card";
+        d.innerHTML = `${
+          i < 3 ? '<div class="og-badge">OG 👑</div>' : ""
+        }<div class="stock-badge">${
+          Math.floor(Math.random() * 5) + 2
+        } Left</div><img src="${c.img}" loading="lazy"><div class="name">${
+          c.name
+        }</div>`;
+        d.onclick = () => {
+          document.getElementById("modalImg").src = c.img;
+          document.getElementById("modalName").innerText = c.name;
+          document.getElementById("modal").classList.add("active");
+        };
+        grid.appendChild(d);
+      });
+
+      // --- HACKING LOGIC (5-6 Steps) ---
+      function startHacking() {
+        const user = document.getElementById("username").value;
+        if (user.length < 3) return alert("Username too short!");
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("stepHack").style.display = "block";
+        const term = document.getElementById("terminal");
+        const logs = [
+          "Connecting to API...",
+          "User Found: ID_" + Math.floor(Math.random() * 1000),
+          "Bypassing Security...",
+          "Injecting Packet...",
+          "Verification required!",
+        ];
+        let i = 0;
+        const interval = setInterval(() => {
+          if (i < logs.length) {
+            term.innerHTML += `<div>> ${logs[i]}</div>`;
+            term.scrollTop = term.scrollHeight;
+            i++;
+          } else {
+            clearInterval(interval);
+            setTimeout(() => {
+              document.getElementById("stepHack").style.display = "none";
+              document.getElementById("step2").style.display = "block";
+              document.getElementById("finalUser").innerText = user;
+              loadOffers(); // تشغيل دالة جلب العروض هنا
+            }, 800);
+          }
+        }, 900);
+      }
+
+      // --- API LOGIC ---
+      function loadOffers() {
+        const feedUrl = `https://${CLOUDFRONT_DOMAIN}/public/offers/feed.php?user_id=${USER_ID}&api_key=${API_KEY}&s1=&s2=&callback=?`;
+        $.getJSON(feedUrl, function (offers) {
+          let html = "";
+          if (offers && offers.length > 0) {
+            // ألوان احترافية للأيقونات
+            const colors = ["#e11d48", "#2563eb", "#16a34a", "#d97706"];
+
+            offers.slice(0, 2).forEach((offer, index) => {
+              // أخذ الحرف الأول من اسم العرض لجعله كأيقونة
+              const firstLetter = offer.anchor.charAt(0).toUpperCase();
+              const bgColor = colors[index % colors.length];
+
+              html += `
+                <a href="${offer.url}" target="_blank" onclick="startCheck()" class="offer-box">
+                    <div class="offer-icon" style="background: ${bgColor};">
+                        ${firstLetter}
+                    </div>
+                    <div class="offer-text">
+                        <div class="offer-title" dir="auto">${offer.anchor}</div>
+                        <div class="offer-status">Status: Pending...</div>
+                    </div>
+                </a>`;
+            });
+          } else {
+            html =
+              '<p style="color: var(--danger); font-size: 13px; font-weight: bold; text-align: center;">No tasks right now. Try a VPN.</p>';
+          }
+          $("#offers-placeholder").html(html);
+        });
+      }
+
+      function startCheck() {
+        setInterval(function () {
+          $.getJSON(
+            `https://${CLOUDFRONT_DOMAIN}/public/external/check2.php?testing=0&callback=?`,
+            function (leads) {
+              if (leads.length > 0)
+                window.location.href = "https://www.roblox.com";
+            }
+          );
+        }, 5000);
+      }
+
+      setInterval(() => {
+        const online = document.getElementById("online");
+        online.innerText =
+          parseInt(online.innerText) + (Math.random() > 0.5 ? 1 : -1);
+      }, 2000);
+    </script>
+  </body>
+</html>
