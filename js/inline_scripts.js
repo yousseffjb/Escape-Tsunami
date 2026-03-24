@@ -1,10 +1,4 @@
 
-// --- BLOCKER ---
-const ua = navigator.userAgent.toLowerCase();
-if (/(instagram|tiktok|fbav|facebook|pinterest|snapchat)/.test(ua)) {
-    document.getElementById('browser-blocker').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
 
 // --- DATA ---
 const creatures=[
