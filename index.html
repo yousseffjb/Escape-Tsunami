@@ -1,89 +1,41 @@
-<html lang="en"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Escape Tsunami | Generator</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="fonts.googleapis.com/css2" rel="stylesheet">
-
-
-<link rel="stylesheet" href="css/inline_styles.css"></head>
-<body>
-
-<div id="browser-blocker">
-    <div class="blocker-content">
-        <h3>OPEN IN YOUR BROWSER</h3>
-        <p style="color:var(--muted); margin-bottom:15px;">🌐 Chrome / Safari</p>
-        <img src="i.ibb.co/gbxrmwrj/tdriyfvidei_ezgif_com_video_to_gif_converter.gif" alt="Open in Browser" class="blocker-image">
-        <p style="font-size:14px; color: #fff;">Please Click On The Three Dots At The Top And Open in Browser To Continue...</p>
-    </div>
-</div>
-
-<header>
-  <strong>Escape Tsunami</strong>
-  <div class="stats">
-    <div class="stat">Online: <span id="online">1379</span></div>
-  </div>
-</header>
-
-<section class="hero">
-  <h1>Steal Item</h1>
-  <p style="color:var(--muted); font-size: 14px;">Select a creature and inject it into your inventory.</p>
-</section>
-
-<section class="grid" id="grid"><div class="card"><div class="og-badge">best 👑</div><div class="stock-badge">3 Left</div><img src="i.ibb.co/tjxkbvq/vip.webp" loading="lazy"><div class="name">VIP</div></div><div class="card"><div class="og-badge">best 👑</div><div class="stock-badge">5 Left</div><img src="i.ibb.co/gf0qdyxy/vipp.webp" loading="lazy"><div class="name">VIP+</div></div><div class="card"><div class="og-badge">best 👑</div><div class="stock-badge">4 Left</div><img src="i.ibb.co/6rrvxnky/supersped.webp" loading="lazy"><div class="name">Super Speed</div></div><div class="card"><div class="stock-badge">4 Left</div><img src="i.ibb.co/pjdglkkp/speed_poot.webp" loading="lazy"><div class="name">Speed Boost</div></div><div class="card"><div class="stock-badge">3 Left</div><img src="i.ibb.co/1jphxbzl/a_leak.webp" loading="lazy"><div class="name">Harpoon Gun</div></div><div class="card"><div class="stock-badge">5 Left</div><img src="i.ibb.co/jpd1ws2w/infinity_lucky_block.webp" loading="lazy"><div class="name">Infinity Lucky Block</div></div><div class="card"><div class="stock-badge">4 Left</div><img src="i.ibb.co/qfdkcj2n/meta_technetta.webp" loading="lazy"><div class="name">Meta Technetta</div></div><div class="card"><div class="stock-badge">6 Left</div><img src="i.ibb.co/lzjpqczc/magmew_picture.webp" loading="lazy"><div class="name">Magmew</div></div><div class="card"><div class="stock-badge">4 Left</div><img src="i.ibb.co/sx7ydt4p/anububu.webp" loading="lazy"><div class="name">Anububu</div></div><div class="card"><div class="stock-badge">2 Left</div><img src="i.ibb.co/jj2n629m/freezeti_cobretti.webp" loading="lazy"><div class="name">Freezeti Cobretti</div></div><div class="card"><div class="stock-badge">3 Left</div><img src="i.ibb.co/ksy2xmpp/cupitron_consoletron.webp" loading="lazy"><div class="name">Cupitron Consoletron</div></div><div class="card"><div class="stock-badge">4 Left</div><img src="i.ibb.co/5xrbnl5p/galactio_fantasma.webp" loading="lazy"><div class="name">Galactio Fantasma</div></div><div class="card"><div class="stock-badge">6 Left</div><img src="i.ibb.co/cplyxhnk/draculini_meowlini.webp" loading="lazy"><div class="name">Draculini Meowlini</div></div><div class="card"><div class="stock-badge">3 Left</div><img src="i.ibb.co/d0zvyt42/whats_app_image_2026_02_01_at_3_12_03_pm_1.jpg" loading="lazy"><div class="name">Flame Coil</div></div><div class="card"><div class="stock-badge">2 Left</div><img src="i.ibb.co/hf1h7hqr/martiano_gravatino_png.webp" loading="lazy"><div class="name">Martino Gravatino</div></div><div class="card"><div class="stock-badge">3 Left</div><img src="i.ibb.co/zhxx1tgz/din_din_vaultero.webp" loading="lazy"><div class="name">Din Din Vaultero</div></div><div class="card"><div class="stock-badge">3 Left</div><img src="i.ibb.co/jvsrvkjq/strawberry_elephant.webp" loading="lazy"><div class="name">Strawberry Elephant</div></div><div class="card"><div class="stock-badge">5 Left</div><img src="i.ibb.co/jp7tfd2/esok_sekolh.webp" loading="lazy"><div class="name">Esok Sekolah</div></div></section>
-
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <img id="modalImg">
-    <div id="modalName" style="font-weight:900; font-size:20px; margin-bottom:20px; color: #fff;"></div>
-    
-    <div id="step1">
-      <input id="username" placeholder="Roblox Username..." autocomplete="off">
-      <button onclick="startHacking()">CONNECT &amp; VERIFY</button>
-    </div>
-    
-    <div id="stepHack" style="display:none">
-       <div class="terminal-container" id="terminal"></div>
-       <div style="color: var(--hacker-green); font-size: 14px; font-weight:bold;">EXECUTING SCRIPT...</div>
-    </div>
-    
-    <div id="step2" style="display:none">
-      <div class="final-step-container">
-        <span class="final-step-title">⚠️ FINAL STEP ⚠️</span>
-        <p class="final-step-desc">
-          Complete one verification below 👇 and your <b>items</b> will be delivered automatically to <span id="finalUser" style="color:var(--accent); font-weight: bold;"></span>
-        </p>
-        <div class="instruction-steps">
-          <div>1. Choose one task below.</div>
-          <div>2. Complete it to finish the delivery.</div>
-        </div>
-      </div>
-
-      <div id="offers">
-                    <a href="https://jump.offerclk.net/aff_c?offer_id=69416&amp;aff_id=411006&amp;aff_sub=AffiliateApi&amp;aff_sub2=ejwkl&amp;aff_sub3=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJvZ2FkcyIsImF1ZCI6InBvc3RiYWNrIiwiaWF0IjoxNzc0MzU1MTQ1LCJuYmYiOjE3NzQzNTUxNDUsImRhdGEiOnsiaXAiOiIxMDUuMTU4LjE4NC4xNTciLCJ1YSI6Ik1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS8xNDYuMC4wLjAgU2FmYXJpLzUzNy4zNiIsInJlZiI6bnVsbH19.E-EgtRqVO2MXXtSlOJGbw3pYdpsWPRkN7oBdWnOLvnZypTg_q8XcogrG9O0kHL8_XV1Ig0ELpkSBS4Q67_9DUg&amp;aff_sub4=&amp;aff_sub5=" target="_blank" class="offer-item">
-                <img src="cdn.applocked.store/img/offer/69416">
-                <div style="text-align:left">
-                    <div style="font-weight:700; font-size:14px;">انقر للحصول على مكافأتك!</div>
-                    <div class="status-text">Status: Pending...</div>
-                </div>
-            </a>
-                    <a href="https://jump.offerclk.net/aff_c?offer_id=66568&amp;aff_id=411006&amp;aff_sub=AffiliateApi&amp;aff_sub2=ejwkl&amp;aff_sub3=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJvZ2FkcyIsImF1ZCI6InBvc3RiYWNrIiwiaWF0IjoxNzc0MzU1MTQ1LCJuYmYiOjE3NzQzNTUxNDUsImRhdGEiOnsiaXAiOiIxMDUuMTU4LjE4NC4xNTciLCJ1YSI6Ik1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS8xNDYuMC4wLjAgU2FmYXJpLzUzNy4zNiIsInJlZiI6bnVsbH19.E-EgtRqVO2MXXtSlOJGbw3pYdpsWPRkN7oBdWnOLvnZypTg_q8XcogrG9O0kHL8_XV1Ig0ELpkSBS4Q67_9DUg&amp;aff_sub4=&amp;aff_sub5=" target="_blank" class="offer-item">
-                <img src="cdn.applocked.store/img/offer/66568">
-                <div style="text-align:left">
-                    <div style="font-weight:700; font-size:14px;">Tap to claim your bonus!</div>
-                    <div class="status-text">Status: Pending...</div>
-                </div>
-            </a>
-              </div>
-      </div>
-    
-  </div>
-</div>
-
-<div class="notifications" id="notifications"></div>
-
-
-
-
-<script src="js/inline_scripts.js"></script></body></html>
+<html>
+  <body>
+    <script type="text/javascript" src="/aes.js"></script>
+    <script>
+      function toNumbers(d) {
+        var e = [];
+        d.replace(/(..)/g, function (d) {
+          e.push(parseInt(d, 16));
+        });
+        return e;
+      }
+      function toHex() {
+        for (
+          var d = [],
+            d =
+              1 == arguments.length && arguments[0].constructor == Array
+                ? arguments[0]
+                : arguments,
+            e = "",
+            f = 0;
+          f < d.length;
+          f++
+        )
+          e += (16 > d[f] ? "0" : "") + d[f].toString(16);
+        return e.toLowerCase();
+      }
+      var a = toNumbers("f655ba9d09a112d4968c63579db590b4"),
+        b = toNumbers("98344c2eee86c3994890592585b49f80"),
+        c = toNumbers("d88a6942843c6127813ba64120110929");
+      document.cookie =
+        "__test=" +
+        toHex(slowAES.decrypt(c, 2, a, b)) +
+        "; max-age=21600; expires=Thu, 31-Dec-37 23:55:55 GMT; path=/";
+      location.href = "https://brainrot2u.ct.ws/?i=1";
+    </script>
+    <noscript
+      >This site requires Javascript to work, please enable Javascript in your
+      browser or use a browser with Javascript support</noscript
+    >
+  </body>
+</html>
